@@ -32,3 +32,43 @@ CREATE TABLE rbi_public_finance (
     non_development_expenditure_cr BIGINT,
     gross_fiscal_deficit_cr BIGINT
 );
+
+
+
+Key Analytical Queries & Findings
+1. Development Expenditure Ratio & Deficit Share
+Calculates total expenditure and computes development spending and fiscal deficit as percentages of total spending.
+
+SELECT 
+    fiscal_year,
+    development_expenditure_cr AS dev_exp_cr,
+    non_development_expenditure_cr AS non_dev_exp_cr,
+    (development_expenditure_cr + non_development_expenditure_cr) AS total_expenditure_cr,
+    gross_fiscal_deficit_cr AS fiscal_deficit_cr,
+    ROUND((development_expenditure_cr * 100.0) / (development_expenditure_cr + non_development_expenditure_cr), 2) AS dev_spending_pct,
+    ROUND((gross_fiscal_deficit_cr * 100.0) / (development_expenditure_cr + non_development_expenditure_cr), 2) AS deficit_to_total_exp_pct
+FROM rbi_public_finance
+ORDER BY fiscal_year ASC;
+
+Key Finding: Development expenditure consistently accounts for ~60–68% of total state spending, reflecting sustained priority toward social infrastructure, healthcare, and education.
+
+
+2. Year-over-Year (YoY) Spending Growth
+Utilizes LAG() window functions to evaluate annual spending expansion rates.
+
+SELECT 
+    fiscal_year,
+    development_expenditure_cr,
+    LAG(development_expenditure_cr, 1) OVER (ORDER BY fiscal_year ASC) AS prev_year_dev_exp,
+    development_expenditure_cr - LAG(development_expenditure_cr, 1) OVER (ORDER BY fiscal_year ASC) AS yoy_change_cr,
+    ROUND(
+        (development_expenditure_cr - LAG(development_expenditure_cr, 1) OVER (ORDER BY fiscal_year ASC)) * 100.0 
+        / LAG(development_expenditure_cr, 1) OVER (ORDER BY fiscal_year ASC), 2
+    ) AS yoy_growth_pct
+FROM rbi_public_finance
+ORDER BY fiscal_year ASC;
+
+Key Finding: Development spending scaled over 9x from ₹4.64 Lakh Crore in FY 2007-08 to >₹43.48 Lakh Crore (BE) in FY 2025-26. A noticeable surge in Gross Fiscal Deficit occurred in FY 2020-21 due to COVID-19 pandemic response measures.
+
+
+
