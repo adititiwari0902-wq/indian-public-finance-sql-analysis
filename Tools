@@ -1,0 +1,7 @@
+Database Management: MySQL
+
+SQL Client: DbGate
+
+Data Preprocessing: Google Sheets / MS Excel
+
+SQL Concepts Used: DDL (CREATE TABLE), DML (INSERT), Data Types (BIGINT, VARCHAR), Aggregate Functions (SUM, AVG, ROUND), Window Functions (LAG() OVER()).
