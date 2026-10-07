@@ -1,0 +1,7 @@
+ETL & Data Pipeline: Clean, format, and load multi-line aggregate financial tables into MySQL.
+
+Expenditure Ratios: Quantify the proportion of state resources dedicated to social and economic development versus administrative/non-development spending.
+
+Trend & Growth Analysis: Leverage SQL window functions (LAG()) to calculate Year-over-Year (YoY) growth rates in development spending.
+
+Deficit Dynamics: Evaluate
