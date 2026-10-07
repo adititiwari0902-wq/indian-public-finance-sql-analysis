@@ -70,5 +70,7 @@ ORDER BY fiscal_year ASC;
 
 Key Finding: Development spending scaled over 9x from ₹4.64 Lakh Crore in FY 2007-08 to >₹43.48 Lakh Crore (BE) in FY 2025-26. A noticeable surge in Gross Fiscal Deficit occurred in FY 2020-21 due to COVID-19 pandemic response measures.
 
-
-
+Repository Structure
+├── rbi_public_finance_master_clean.csv   # Cleaned master dataset
+├── indian_public_finance_analysis.sql    # Complete SQL script (DDL + Queries)
+└── README.md                             # Project documentation
